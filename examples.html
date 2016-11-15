@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="openhours.js"></script>
+
+
+
+</head>
+
+<body>
+
+<div id="openhours">
+<p>O'Shaughnessy-Frey Library:</p>
+<div class="todaysHours" data-openhours-location="OSF">-</div>
+<p>Archbishop Ireland Memorial Library:</p>
+<div class="todaysHours" data-openhours-location="IRL">-</div>
+<p>Charles J. Keffer Library:</p>
+<div class="todaysHours" data-openhours-location="KEF">-</div>
+<p>OSF Special Collections &amp; Archives:</p>
+<div class="todaysHours" data-openhours-location="SPC">-</div>
+</div>
+<p><a href="//www.stthomas.edu/libraries/about/hours">Full Calendar of Hours</a></p>
+
+
+<script>
+// Open Hours site specific customization
+$(document).ready(function() {
+	$(document).openhours("config", {apiKey: "AIzaSyAs58j4fH8CnrrwKg2aM9luGcJUTC6zubE",
+									 calendar: { OSF:"ustlibraries@gmail.com",
+							 					 IRL:"juepogdabtljashr8ngloinc3k@group.calendar.google.com",
+							 					 KEF:"2acralg5atee9plf5v2chikem8@group.calendar.google.com",
+							 					 SPC:"e7auqv2giusufkhpp6oncp56r8@group.calendar.google.com",
+											 	 CBN:"1pndp3voa7grifs0n7t10u5hvs@group.calendar.google.com",
+												 MRC:"te451onrutjc4lps4q0201euu0@group.calendar.google.com",
+												 LAW:"g5qm4jt4f3d920vad3sje9gq1k@group.calendar.google.com"
+											   }
+	                                 }
+	);
+});
+</script>
+
+
+</body>
+</html>
