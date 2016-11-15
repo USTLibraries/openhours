@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Untitled Document</title>
+<title>Open Hours Example</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="openhours.js"></script>
 
@@ -11,6 +11,24 @@
 </head>
 
 <body>
+
+<h1>Open Hours</h1>
+
+
+
+<p>The Google Calendar API key is restrticted to use on *.stthomas.edu sites. To see the code in action go to: <a href="http://www.stthomas.edu/libraries">www.stthomas.edu/libraries</a></p>
+
+<p>This is just an example of how to use the code. You will need to get your own Google API key and calendar information. How to do that is beyond the scope of this documentation. <a href="https://developers.google.com/google-apps/calendar/auth">Visit the Google Calendar API site for more information</a>.</p>
+
+<h2>Example</h2>
+
+<style>
+#openhours .todaysHours > span, 
+#openhours .dailyHours > span {
+	padding-left: 15px;
+}
+#openhours .dailyHours span { display: block; }
+</style>
 
 <div id="openhours">
 <p>O'Shaughnessy-Frey Library:</p>
@@ -21,6 +39,8 @@
 <div class="todaysHours" data-openhours-location="KEF">-</div>
 <p>OSF Special Collections &amp; Archives:</p>
 <div class="todaysHours" data-openhours-location="SPC">-</div>
+<p>Media and Music Collections:</p>
+<div class="dailyHours" data-openhours-location="MRC">-</div>
 </div>
 <p><a href="//www.stthomas.edu/libraries/about/hours">Full Calendar of Hours</a></p>
 
@@ -28,20 +48,53 @@
 <script>
 // Open Hours site specific customization
 $(document).ready(function() {
-	$(document).openhours("config", {apiKey: "AIzaSyAs58j4fH8CnrrwKg2aM9luGcJUTC6zubE",
-									 calendar: { OSF:"ustlibraries@gmail.com",
-							 					 IRL:"juepogdabtljashr8ngloinc3k@group.calendar.google.com",
-							 					 KEF:"2acralg5atee9plf5v2chikem8@group.calendar.google.com",
-							 					 SPC:"e7auqv2giusufkhpp6oncp56r8@group.calendar.google.com",
-											 	 CBN:"1pndp3voa7grifs0n7t10u5hvs@group.calendar.google.com",
-												 MRC:"te451onrutjc4lps4q0201euu0@group.calendar.google.com",
-												 LAW:"g5qm4jt4f3d920vad3sje9gq1k@group.calendar.google.com"
-											   }
-	                                 }
+	$(document).openhours("config", 
+		{apiKey: "AIzaSyAs58j4fH8CnrrwKg2aM9luGcJUTC6zubE",
+		 calendar: { OSF:"ustlibraries@gmail.com",
+					 IRL:"juepogdabtljashr8ngloinc3k@group.calendar.google.com",
+					 KEF:"2acralg5atee9plf5v2chikem8@group.calendar.google.com",
+					 SPC:"e7auqv2giusufkhpp6oncp56r8@group.calendar.google.com",
+					 CBN:"1pndp3voa7grifs0n7t10u5hvs@group.calendar.google.com",
+					 MRC:"te451onrutjc4lps4q0201euu0@group.calendar.google.com",
+					 LAW:"g5qm4jt4f3d920vad3sje9gq1k@group.calendar.google.com"
+				   }
+		 }
 	);
 });
 </script>
 
+<h2>CSS Styling</h2>
+
+<p>No CSS Styling is included in the default code. However it can be acheived by applying styles to the following structure:</p>
+
+<textarea style="width:50%;min-width: 300px;height: 300px;">
+<style>
+#openhours {}
+#openhours .todaysHours {}
+#openhours .todaysHours > span {}
+#openhours .dailyHours {}
+#openhours .dailyHours > span {}
+</style>
+
+
+<div id="openhours">
+    <p>Main Location:</p>
+    <div class="todaysHours" data-openhours-location="OSF">
+        <span>Tue 11/15 - Open 7:30am - 2am</span>
+    </div>
+    
+    <p>Mall Location:</p>
+    <div class="todaysHours" data-openhours-location="IRL">
+        <span>Tue 11/15 - Open 8am - 10pm</span>
+    </div>
+</div>
+</textarea>
+
+<h2>Setting Up the Calendar</h2>
+
+<p>There needs to be a dedicated calendar for hours. Simply add an event during the time span you wish (up to 11:59pm!) and for the event title enter &quot;Open 7:30am - noon&quot;. Yes, it is redundant, but it allows you to do things like &quot;8am - 1pm by appointment only&quot; and stay up past midnight, &quot;8am - 2am&quot;. However, you'll note that if you are open past midnight, the next day's hours will show.</p>
+
+<p>There are no plans on changing the way items are placed into the calendar, it works as desired on our end. Feel free to tweak the code if you desire something a little different.</p>
 
 </body>
 </html>

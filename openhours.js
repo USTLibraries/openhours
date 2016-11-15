@@ -116,9 +116,10 @@
 	======================================================================================== */	
 	var listLocationHours = function(elem) {
 		
-		debug("Getting hours for: " + $(elem).attr("data-openhours-location"));
-
 		var location = $(elem).attr("data-openhours-location");
+		
+		debug("Getting hours for: " + location);
+
 		$(elem).html("-"); // put a placeholder in ASAP so page doesn't jump later
 
 		// get the current date/time
@@ -147,7 +148,7 @@
 		// execute the request and give it a function to process
 		request.execute(function(resp) {
 			var events = resp.items;
-			var span = document.createElement('span');  // this is the tag the hours will reside in
+
 			var hoursTextNode = document.createTextNode('No Hours Listed'); // default	
 			
 			// clear out any placeholders
@@ -157,7 +158,8 @@
 			if (events.length > 0) {
 				// process each of the events
 				for (var i = 0; i < events.length; i++) {
-
+					
+					var span = document.createElement('span');  // this is the tag the hours will reside in
 					var eventItem = events[i];
 					var whenStart = eventItem.start.dateTime;
 					var whenEnd = eventItem.end.dateTime;
@@ -175,7 +177,7 @@
 					var eventStart = new Date(whenStart);
 					var eventEnd = new Date(whenEnd);
 
-					debug("Event: ([ " + whenStart + " ] - [ " + whenEnd + " ]) ");
+					debug(location + " Event: " + whenStart + " - " + whenEnd);
 					
 					var dateString = dayOfWeek[ eventStart.getDay() ] + ' ' +  (eventStart.getMonth()+1) + '/' + eventStart.getDate();
 		
@@ -191,12 +193,13 @@
 					hoursTextNode = document.createTextNode(dateString);
 					
 					// put the text in the span tag, then add the span tag
-					span.appendChild(hoursTextNode);		
+					$(span).append(hoursTextNode);		
 					$(elem).append(span); 				
 				}
 			} else { 					
 				// No events found, put the default text out there
-				span.appendChild(hoursTextNode);
+				var span = document.createElement('span');
+				$(span).append(hoursTextNode);
 				$(elem).append(span); 
 			}
 			
