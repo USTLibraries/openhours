@@ -1,3 +1,4 @@
+/** @preserve OPENHOURS: VIEW DOC|CODE|LIC @ github.com/ustlibraries/openhours */
 /*  ============================================================================================
     ********************************************************************************************
     	Open Hours from Google Calendar 
@@ -6,13 +7,13 @@
 		University of St. Thomas Libraries - clk
 		www.stthomas.edu/libraries
 		
-		version: 0.1.2-2016.11.15
+		version: 0.1.3-2017.01.13-01
 		https://github.com/ustlibraries/openhours  - Repository
 	
 		Released under Creative Commons Attribution 4.0 International license (CC BY)
 		https://creativecommons.org/licenses/by/4.0/
 		
-		The code with it's heavy use of comments is provided as an educational resource
+		The code with its heavy use of comments is provided as an educational resource
 	
     ********************************************************************************************	
 */
@@ -23,11 +24,15 @@
    	Local variables
 */
 	
-    /* Just an ID--prevents unncessary hair pulling */
-	var version = "0.1.2-20161115"; // just a manual version number for debugging: "Is it loading the code I *thought* I uploaded?"
-		
+	/* Script info */
+	var version = "0.1.3-2017.01.13-01"; // just a manual version number for debugging and preventing unneccessary hair pulling: "Is it loading the code I *thought* I uploaded?"
+	var code    = "github.com/ustlibraries/openhours";
+	var handle  = "OPENHOURS";
+	var name    = "Open Hours";
+	
 	/* Settings (Read/Write) */
-	var silent = false; // does debug() output to console.log?
+	var silent = false; // should debug() not output to console.log?		
+
 	var apiKey = "";
 	var locationCalendar = {};
 	var timeOffset = "-06:00"; // the offset of the calendar, TODO: make sure this works in all timezones
@@ -52,9 +57,9 @@
 		if( !silent ) {
 			var d = new Date();
 			var ts = d.getHours() +":"+ d.getMinutes() +":"+ d.getSeconds() +"."+ d.getMilliseconds();
-			console.log("OPENHOURS ["+ts+"] : " + text);
+			console.log(handle+" ["+ts+"] : " + text);
 		}
-	};  
+	}; 
 
 /* ********************************************************************************************
    	Setters for our settings
@@ -71,28 +76,28 @@
 			silent = false;
 			debug("Unsilenced");	
 		}
-	}
+	};
 
 	/* ========================================================================================
 		setCalendars()
 	======================================================================================== */	
 	var setCalendars = function ( calendarsArray ) {
 		locationCalendar = calendarsArray;
-	}
+	};
 
 	/* ========================================================================================
 		setKey()
 	======================================================================================== */		
 	var setKey = function ( key ) {
 		apiKey = key;
-	}
+	};
 
 	/* ========================================================================================
 		setTimeOffset()
 	======================================================================================== */		
 	var setTimeOffset = function ( offset ) {
 		timeOffset = offset;
-	}
+	};
 
 /* ********************************************************************************************
    	Local Functions
@@ -233,7 +238,6 @@
 	
 		switch (action.toLowerCase()) {
 			case "load":
-				debug("Version: " + version);
 				// make sure we have a key and calendar
 				if(apiKey !== "" && Object.keys(locationCalendar).length > 0) {		
 					// Load Google Calendar client library. List upcoming events once client library is loaded.
@@ -259,6 +263,8 @@
 
 	};
 	
+	debug("Loaded "+name+" ("+code+") [ver"+version+"]"); 
+	
 	
 }( jQuery ));
 
@@ -270,7 +276,7 @@
 var init_openhours = function() {
 	$(document).openhours("debug", {message: "Load called"}); // we make the call to e
 	$("#openhours").openhours("load");
-}
+};
 
 /* **************************************************************************
 	Kick things off when the document is ready - only if there is a placeholder found
